@@ -46,6 +46,7 @@ class vFleetTrackData extends CodonData
 				FROM ".TABLE_PREFIX."pireps p
 				LEFT JOIN ".TABLE_PREFIX."airports AS dep ON dep.icao = p.depicao
 				LEFT JOIN ".TABLE_PREFIX."airports AS arr ON arr.icao = p.arricao
+				WHERE p.aircraft = {$id}
 				ORDER BY submitdate DESC LIMIT {$count}");
 	}
 	
@@ -57,7 +58,7 @@ class vFleetTrackData extends CodonData
 				FROM " . TABLE_PREFIX . "schedules AS s
 				LEFT JOIN ".TABLE_PREFIX."airports AS dep ON dep.icao = s.depicao
 				LEFT JOIN ".TABLE_PREFIX."airports AS arr ON arr.icao = s.arricao
-				WHERE aircraft = {$id}");
+				WHERE s.aircraft = {$id}");
 	}
 	
 	public static function countFlights($id)
