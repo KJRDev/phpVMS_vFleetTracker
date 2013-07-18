@@ -65,6 +65,51 @@ else
 <?php
 }
 ?>
+<h3>Current Aircraft Location</h3>
+<?php
+$location = vFleetTrackData::getLastFlightAircraft($aircraft->id);
+if($location)
+{
+	$airport = OperationsData::getAirportInfo($location->arricao);
+?>
+<div class="mapcenter" align="center">
+<div id="currentlocation" style="width: 960px; height: 520px;"></div>
+</div>
+
+<script type="text/javascript">
+var options = {
+	zoom: 5,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+
+var map = new google.maps.Map(document.getElementById("currentlocation"), options);
+var flightMarkers = [];
+current_location = new google.maps.LatLng(<?php echo $airport->lat?>, <?php echo $airport->lng?>);
+flightMarkers[flightMarkers.length] = new google.maps.Marker({
+		position: current_location,
+		map: map,
+		title: "<?php echo "$airport->name ($airport->icao)";?>"
+	});
+
+if(flightMarkers.length > 0)
+{
+	var bounds = new google.maps.LatLngBounds();
+	for(var i = 0; i < flightMarkers.length; i++) {
+		bounds.extend(flightMarkers[i].position);
+	}
+}
+
+map.fitBounds(bounds); 
+</script>
+<?php
+}
+else
+{
+	echo 'There is no aircraft location yet!';
+}
+?>
+
+
 <h3>Latest 15 Flights List</h3>
 <?php MainController::Run('vFleetTracker', 'buildLastFlightTable', $aircraft->id, 15);?>
 
