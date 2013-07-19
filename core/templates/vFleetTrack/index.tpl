@@ -21,6 +21,9 @@ This module is only use for phpVMS (www.phpvms.net) - (A Virtual Airline Admin S
 		return;
 	}
 ?>
+
+<?php MainController::Run('vFleetTracker', 'viewallmap');?>
+
 <table id="tabledlist" class="tablesorter">
 <thead>
 <tr>

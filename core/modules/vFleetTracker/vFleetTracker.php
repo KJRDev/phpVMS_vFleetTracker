@@ -25,6 +25,12 @@ class vFleetTracker extends CodonModule
 		$this->render('vFleetTrack/view.tpl');
 	}
 	
+	public function viewallmap()
+	{
+		$this->set('data', vFleetTrackData::getAllLastLocation());
+		$this->render('vFleetTrack/map.tpl');
+	}
+	
 	public function buildLastFlightTable($id, $count)
 	{
 		$this->set('flights', vFleetTrackData::getLastNumFlightsAircraft($id, $count));

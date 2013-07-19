@@ -38,6 +38,21 @@ class vFleetTrackData extends CodonData
 							WHERE aircraft = {$id} ORDER BY submitdate DESC LIMIT 1");
 	}
 	
+	public static function getAllLastLocation()
+	{
+		return DB::get_results("SELECT flight.*, UNIX_TIMESTAMP(flight.submitdate) as submitdate,
+					dep.name as depname, dep.lat AS deplat, dep.lng AS deplng,
+					arr.name as arrname, arr.lat AS arrlat, arr.lng AS arrlng,
+                                        ac.icao AS acicao, ac.name AS acname, ac.fullname AS acfullname,
+                                        ac.registration AS acregistration
+				FROM (SELECT * FROM phpvms_pireps ORDER BY submitdate DESC) AS flight
+                                LEFT JOIN phpvms_aircraft AS ac ON ac.id = flight.aircraft
+				LEFT JOIN phpvms_airports AS dep ON dep.icao = flight.depicao
+				LEFT JOIN phpvms_airports AS arr ON arr.icao = flight.arricao
+                                GROUP BY flight.aircraft
+				ORDER BY submitdate DESC");	
+	}
+	
 	public static function getLastNumFlightsAircraft($id, $count = "5")
 	{
 		return DB::get_results("SELECT p.*, UNIX_TIMESTAMP(p.submitdate) as submitdate,
