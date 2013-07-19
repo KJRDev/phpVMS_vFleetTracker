@@ -72,8 +72,8 @@ foreach($allaircrafts as $aircraft)
 	<td><?php echo $last;?></td>
     <td><?php echo $lastlocation;?></td>
     <td><?php echo vFleetTrackData::countFlights($aircraft->id);?></td>
-    <td><?php echo vFleetTrackData::countHours($aircraft->id);?></td>
-    <td><?php echo vFleetTrackData::countMiles($aircraft->id);?></td>
+    <td><?php echo round(vFleetTrackData::countHours($aircraft->id));?></td>
+    <td><?php echo round(vFleetTrackData::countMiles($aircraft->id));?></td>
     <td><a href="<?php echo url('/vFleetTracker/view/'.$aircraft->registration);?>">View Aircraft</a></td>
 <?php
 }

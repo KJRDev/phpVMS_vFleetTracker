@@ -40,7 +40,7 @@ foreach($flights as $flight)
 	<td><?php echo $flight->code . $flight->flightnum; ?></td>
 	<td><?php echo $flight->depicao; ?></td>
 	<td><?php echo $flight->arricao; ?></td>
-	<td><?php echo $flight->flighttime; ?></td>
+	<td><?php echo round($flight->flighttime); ?></td>
 	<td><?php echo date(DATE_FORMAT, $flight->submitdate); ?></td>
     <td><?php echo $flight->landingrate; ?></td>
     <td><a href="<?php echo url('/pireps/view/'.$flight->pirepid);?>">View</a></td>

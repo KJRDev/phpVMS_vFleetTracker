@@ -44,9 +44,9 @@ else
 <strong>Cargo: </strong><?php echo $aircraft->maxcargo;?>
 <br /> 
 <h3>Aircraft Stats</h3>
-<strong>Total Miles: </strong><?php echo vFleetTrackData::countMiles($aircraft->id);?>
+<strong>Total Miles: </strong><?php echo round(vFleetTrackData::countMiles($aircraft->id));?>
 <br />
-<strong>Total Hours: </strong><?php echo vFleetTrackData::countHours($aircraft->id);?>
+<strong>Total Hours: </strong><?php echo round(vFleetTrackData::countHours($aircraft->id));?>
 <br />
 <strong>Total Flights: </strong><?php echo vFleetTrackData::countFlights($aircraft->id);?>
 <br />
@@ -60,7 +60,7 @@ else
 else
 {
 ?>
-<strong>Total Cargo Carried: </strong><?php echo vFleetTrackData::countPassengers($aircraft->id);?>
+<strong>Total Cargo Carried: </strong><?php echo round(vFleetTrackData::countPassengers($aircraft->id));?>
 <br />
 <?php
 }
